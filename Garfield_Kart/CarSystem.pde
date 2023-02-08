@@ -1,17 +1,19 @@
 class CarSystem {
 int       generation = 0;
+double fitness;
+
+SensorSystem  sensorSystem = new SensorSystem();
+
   //CarSystem - 
   //Her kan man lave en generisk alogoritme, der skaber en optimal "hjerne" til de forhåndenværende betingelser
 
    
   ArrayList<CarController> CarControllerList  = new ArrayList<CarController>();
 
-  CarSystem(int populationSize) {
-    for (int i=0; i<populationSize; i++) { 
+  CarSystem() {
       CarController controller = new CarController();
       CarControllerList.add(controller);
     }
-  }
 
   void updateAndDisplay() {
     //1.) Opdaterer sensorer og bilpositioner
@@ -25,14 +27,23 @@ int       generation = 0;
     }
   }
   
- 
-/*public void calculateFitness (){
-     
-    if (frameCount %200==0)
-   // generation++;
-   // println(generation);
- */  
-   // }
+  public void calculateFitness() {
+    
+    println(sensorSystem.whiteSensorFrameCount);
+   /*if (sensorSystem.clockWiseRotationFrameCounter < 0) {
+   this.fitness = 0;
+   
+   } else*/ if(sensorSystem.whiteSensorFrameCount > 0) {
+   this.fitness = 0;
+   } else {
+   //println(i++);
+   //println(sensorSystem.lastTimeInFrames);
+   this.fitness = sensorSystem.lapTimeInFrames;
+   
+  }  
+  //println(i++);
+  //println( this.fitness);
+}
 
  }
  

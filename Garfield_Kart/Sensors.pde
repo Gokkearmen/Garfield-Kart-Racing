@@ -64,6 +64,7 @@ class SensorSystem {
     color color_car_position = get(int(pos.x), int(pos.y));
     if (color_car_position ==-1) {
       whiteSensorFrameCount = whiteSensorFrameCount+1;
+      println(whiteSensorFrameCount);
     }
     //Laptime calculation
     boolean currentGreenDetection =false;
@@ -72,7 +73,10 @@ class SensorSystem {
     }
     if (lastGreenDetection && !currentGreenDetection) {  //sidst grønt - nu ikke -vi har passeret målstregen 
       lapTimeInFrames = frameCount - lastTimeInFrames; //LAPTIME BEREGNES - frames nu - frames sidst
+
       lastTimeInFrames = frameCount;
+      //println(i++);
+      //println(lastTimeInFrames);
     }   
     lastGreenDetection = currentGreenDetection; //Husker om der var grønt sidst
     //count clockWiseRotationFrameCounter

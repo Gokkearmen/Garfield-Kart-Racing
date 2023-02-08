@@ -1,9 +1,8 @@
 //populationSize: Hvor mange "controllere" der genereres, controller = bil & hjerne & sensorer
-int       populationSize  = 100;
+int       populationSize  = 1;
 int       matingpoolSize = 10;
 int generation;
 int i;
-double fitness;
 CarSystem[] population;
 
 
@@ -20,13 +19,12 @@ void setup() {
    population = new CarSystem[populationSize];
  
   for (i = 0; i < population.length; i++) {
-  CarSystem carSystem       = new CarSystem(populationSize);
+  CarSystem carSystem       = new CarSystem();
   population[i] = carSystem;
   }
 
 }
 
-CarSystem carSystem       = new CarSystem(populationSize);
 
 void draw() {
   clear();
@@ -34,13 +32,18 @@ void draw() {
   rect(0, 50, 1000, 1000);
   image(trackImage, 0, 80);
      
+  for (int i = 0; i < populationSize; i++) {
+    population[i].calculateFitness();
+  }
 
-  carSystem.updateAndDisplay();
+   for (int i = 0; i < populationSize; i++) {
+    population[i].updateAndDisplay();
+  }
+
 
 
 
 /*
-
      
   if (frameCount%200==0) {
     generation++;
@@ -51,14 +54,8 @@ void draw() {
    if(s.whiteSensorFrameCount > 0){
    carSystem.CarControllerList.remove(carSystem.CarControllerList.get(i));
    
-   for (int i = carSystem.CarControllerList.size()-1 ; i >= 0;  i--) {
-   SensorSystem s = carSystem.CarControllerList.get(i).sensorSystem;
-   if(
    }
-   }
-   }
-  */
-   
+ */
 }
 
   
