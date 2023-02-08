@@ -1,10 +1,12 @@
 //populationSize: Hvor mange "controllere" der genereres, controller = bil & hjerne & sensorer
 int       populationSize  = 100;
 int       matingpoolSize = 10;
-int generation = 0;
-double fitness = 1;
-  //CarSystem: Indholder en population af "controllere"
-  CarSystem carSystem       = new CarSystem(populationSize);
+int generation;
+int i;
+double fitness;
+CarSystem[] population;
+
+
 
 //trackImage: RacerBanen , Vejen=sort, Udenfor=hvid, Målstreg= 100%grøn
 PImage    trackImage;
@@ -13,7 +15,18 @@ void setup() {
   size(500, 600);
   frameRate(100);
   trackImage = loadImage("track.png");
+  
+  
+   population = new CarSystem[populationSize];
+ 
+  for (i = 0; i < population.length; i++) {
+  CarSystem carSystem       = new CarSystem(populationSize);
+  population[i] = carSystem;
+  }
+
 }
+
+CarSystem carSystem       = new CarSystem(populationSize);
 
 void draw() {
   clear();
@@ -26,7 +39,7 @@ void draw() {
 
 
 
-
+/*
 
      
   if (frameCount%200==0) {
@@ -44,7 +57,7 @@ void draw() {
    }
    }
    }
-  //
+  */
    
 }
 
