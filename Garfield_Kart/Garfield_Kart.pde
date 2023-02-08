@@ -1,9 +1,13 @@
+import java.util.Arrays;
+
+
 //populationSize: Hvor mange "controllere" der genereres, controller = bil & hjerne & sensorer
-int       populationSize  = 1;
+int       populationSize  = 100;
 int       matingpoolSize = 10;
 int generation;
 int i;
 CarSystem[] population;
+CarSystem[] matingPool;
 
 
 
@@ -23,6 +27,8 @@ void setup() {
   population[i] = carSystem;
   }
 
+   matingPool = new CarSystem[matingpoolSize];
+   
 }
 
 
@@ -31,17 +37,32 @@ void draw() {
   fill(255);
   rect(0, 50, 1000, 1000);
   image(trackImage, 0, 80);
-     
+  
+   for (int i = 0; i < populationSize; i++) {
+   population[i].updateAndDisplay();
+  }
+  
   for (int i = 0; i < populationSize; i++) {
     population[i].calculateFitness();
   }
 
-   for (int i = 0; i < populationSize; i++) {
-    population[i].updateAndDisplay();
+Arrays.sort(population);
+
+for (int i = 0; i < matingPool.length; i++) {
+    matingPool[i] = population[i];
+  }   
+
+ if (frameCount%2000==0) {
+for (int i = 0; i < population.length; i++) {
+    int matingpoolIndex = i % matingpoolSize;
+    CarSystem cars = matingPool[matingpoolIndex];   
+    population[i] = cars.clone(); 
   }
+ }
 
-
-
+ for (int i = 0; i < population.length; i++) {
+    //population[i].mutate();
+  }
 
 /*
      

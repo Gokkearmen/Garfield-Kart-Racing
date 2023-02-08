@@ -1,4 +1,4 @@
-class CarSystem {
+class CarSystem implements Comparable<CarSystem> {
 int       generation = 0;
 double fitness;
 
@@ -45,5 +45,18 @@ SensorSystem  sensorSystem = new SensorSystem();
   //println( this.fitness);
 }
 
+public CarSystem clone() {
+     CarSystem clone = new CarSystem();     
+     return clone;
+  }
+
+ @Override public int compareTo(CarSystem a)
+  {
+      int retval1 = Double.compare(this.fitness, a.fitness);      
+
+      retval1 = retval1 * -1;
+      return retval1;     
+  }
+  
  }
  
