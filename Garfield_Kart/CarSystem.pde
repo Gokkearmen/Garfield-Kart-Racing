@@ -6,8 +6,15 @@ class CarSystem implements Comparable<CarSystem> {
   //CarSystem - 
   //Her kan man lave en generisk alogoritme, der skaber en optimal "hjerne" til de forhåndenværende betingelser
 
-  CarController controller = new CarController();
+  CarController controller;
 
+ CarSystem() {
+   this.controller = new CarController();
+ }
+
+  CarSystem(CarController controller) {
+    this.controller = controller;
+  }
 
   void updateAndDisplay() {
     //1.) Opdaterer sensorer og bilpositioner
@@ -18,24 +25,14 @@ class CarSystem implements Comparable<CarSystem> {
   }
 
   void calculateFitness() {
-
-    boolean isgreen = controller.isGreen();
     int redness = controller.redness();
     float greenness = controller.greenness();
-    
     this.fitness = greenness - redness;
-    /*if (isgreen == false) {
-     this.fitness = this.fitness -2; 
-    } else {
-     this.fitness = this.fitness +1; 
-    
-    }*/
-     println(this.fitness);
- 
   }
 
   public CarSystem clone() {
-    CarSystem clone = new CarSystem();     
+    CarController controllerClone = controller.clone();
+    CarSystem clone = new CarSystem(controllerClone);   
     return clone;
   }
 

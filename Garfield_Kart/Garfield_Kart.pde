@@ -35,6 +35,8 @@ void setup() {
 }
 
 void draw() {
+  
+
   clear();
   fill(255);
   rect(0, 50, 1000, 1000);
@@ -67,7 +69,7 @@ void draw() {
       population[i] = cars.clone();
     }
     
-    println("change generation");
+    println("change generation" + i++);
 
     // mutate new population 
     for (int i = 0; i < population.length; i++) {

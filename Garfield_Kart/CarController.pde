@@ -1,9 +1,21 @@
 class CarController {
   //Forbinder - Sensorer & Hjerne & Bil
   float varians             = 2; //hvor stor er variansen på de tilfældige vægte og bias
-  Car bil                    = new Car();
-  NeuralNetwork hjerne       = new NeuralNetwork(varians); 
-  SensorSystem  sensorSystem = new SensorSystem();
+  Car bil;
+  NeuralNetwork hjerne; 
+  SensorSystem  sensorSystem;
+
+  CarController() {
+    this.bil          = new Car();
+    this.hjerne       = new NeuralNetwork(varians); 
+    this.sensorSystem = new SensorSystem();
+  }
+
+  CarController(Car car, NeuralNetwork neuralNetwork) { 
+    this.bil = car;
+    this.hjerne = neuralNetwork;
+    this.sensorSystem = new SensorSystem();
+  }
 
   void update() {
 
@@ -19,7 +31,7 @@ class CarController {
     float x2 = int(sensorSystem.frontSensorSignal);
     float x3 = int(sensorSystem.rightSensorSignal);    
     turnAngle = hjerne.getOutput(x1, x2, x3);    
-    
+
     //4.)bilen drejes
     bil.turnCar(turnAngle);
   }
@@ -29,19 +41,26 @@ class CarController {
     bil.displayCar();
     sensorSystem.displaySensors();
   }
-  
+
   public boolean isGreen() {
     boolean svar = sensorSystem.isGreen();
     return svar;
   }
-  
+
   public int redness() {
     int redness = sensorSystem.redness();
     return redness;
   }
-  
+
   public float greenness() {
     float greenness = sensorSystem.greenness();
     return greenness;
+  }
+
+  public CarController clone() {
+    Car carClone = bil.clone();
+    NeuralNetwork neuralNetworkClone = hjerne.clone();
+    CarController controllerClone = new CarController(carClone,neuralNetworkClone);     
+    return controllerClone;
   }
 }
