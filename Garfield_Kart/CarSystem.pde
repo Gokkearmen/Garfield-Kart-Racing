@@ -1,6 +1,6 @@
 class CarSystem implements Comparable<CarSystem> {
 int       generation = 0;
-double fitness;
+double fitness = 0;
 
 SensorSystem  sensorSystem = new SensorSystem();
 
@@ -8,6 +8,7 @@ SensorSystem  sensorSystem = new SensorSystem();
   //Her kan man lave en generisk alogoritme, der skaber en optimal "hjerne" til de forhåndenværende betingelser
 
    
+  
   ArrayList<CarController> CarControllerList  = new ArrayList<CarController>();
 
   CarSystem() {
@@ -27,23 +28,9 @@ SensorSystem  sensorSystem = new SensorSystem();
     }
   }
   
-  public void calculateFitness() {
-    
-    println(sensorSystem.whiteSensorFrameCount);
-   /*if (sensorSystem.clockWiseRotationFrameCounter < 0) {
-   this.fitness = 0;
-   
-   } else*/ if(sensorSystem.whiteSensorFrameCount > 0) {
-   this.fitness = 0;
-   } else {
-   //println(i++);
-   //println(sensorSystem.lastTimeInFrames);
-   this.fitness = sensorSystem.lapTimeInFrames;
-   
-  }  
-  //println(i++);
-  //println( this.fitness);
-}
+    void calculateFitness() {
+
+    }
 
 public CarSystem clone() {
      CarSystem clone = new CarSystem();     
@@ -58,5 +45,6 @@ public CarSystem clone() {
       return retval1;     
   }
   
- }
+}
+ 
  
