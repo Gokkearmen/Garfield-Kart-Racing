@@ -1,12 +1,12 @@
 class SensorSystem {
   //SensorSystem - alle bilens sensorer - ogå dem der ikke bruges af "hjernen"
-  
+
   //wall detectors
   float sensorMag = 50;
   float sensorAngle = PI*2/8;
-  
+
   PVector anchorPos           = new PVector();
-  
+
   PVector sensorVectorFront   = new PVector(0, sensorMag);
   PVector sensorVectorLeft    = new PVector(0, sensorMag);
   PVector sensorVectorRight   = new PVector(0, sensorMag);
@@ -56,17 +56,18 @@ class SensorSystem {
   }
 
   void updateSensorsignals(PVector pos, PVector vel) {
+    
     //Collision detectors
     frontSensorSignal = get(int(pos.x+sensorVectorFront.x), int(pos.y+sensorVectorFront.y))==-1?true:false;
     leftSensorSignal = get(int(pos.x+sensorVectorLeft.x), int(pos.y+sensorVectorLeft.y))==-1?true:false;
     rightSensorSignal = get(int(pos.x+sensorVectorRight.x), int(pos.y+sensorVectorRight.y))==-1?true:false;  
+    
     //Crash detector
     color color_car_position = get(int(pos.x), int(pos.y));
     if (color_car_position ==-1) {
       whiteSensorFrameCount = whiteSensorFrameCount+1;
-      
-   
-  }
+    }
+    
     //Laptime calculation
     boolean currentGreenDetection =false;
     if (red(color_car_position)==0 && blue(color_car_position)==0 && green(color_car_position)!=0) {//den grønne målstreg er detekteret
@@ -75,20 +76,19 @@ class SensorSystem {
     if (lastGreenDetection && !currentGreenDetection) {  //sidst grønt - nu ikke -vi har passeret målstregen 
       lapTimeInFrames = frameCount - lastTimeInFrames; //LAPTIME BEREGNES - frames nu - frames sidst
       lastTimeInFrames = frameCount;
-      
-
     }   
     lastGreenDetection = currentGreenDetection; //Husker om der var grønt sidst
+    
     //count clockWiseRotationFrameCounter
     centerToCarVector.set((height/2)-pos.x, (width/2)-pos.y);    
     float currentRotationAngle =  centerToCarVector.heading();
     float deltaHeading   =  lastRotationAngle - centerToCarVector.heading();
     clockWiseRotationFrameCounter  =  deltaHeading>0 ? clockWiseRotationFrameCounter + 1 : clockWiseRotationFrameCounter -1;
     lastRotationAngle = currentRotationAngle;
-    
+
     updateSensorVectors(vel);
-    
-    anchorPos.set(pos.x,pos.y);
+
+    anchorPos.set(pos.x, pos.y);
   }
 
   void updateSensorVectors(PVector vel) {
@@ -101,6 +101,18 @@ class SensorSystem {
     sensorVectorLeft.rotate(-sensorAngle);
     sensorVectorRight.set(sensorVectorFront);
     sensorVectorRight.rotate(sensorAngle);
+  }
+  
+  public boolean isGreen() {
+    return lastGreenDetection;
+  }
+  
+  public int redness() {
+    return whiteSensorFrameCount;
+  }
+  
+  public float greenness() {
+    return clockWiseRotationFrameCounter;
   }
   
   
