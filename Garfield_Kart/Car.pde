@@ -31,4 +31,11 @@ class Car {
     Car clone = new Car(pos, vel);    
     return clone;
   }
+  
+  public float getposx() {
+  return pos.x;
+  }
+  public float getposy() {
+  return pos.y;
+  }
 }

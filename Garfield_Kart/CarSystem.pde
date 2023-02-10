@@ -25,10 +25,23 @@ class CarSystem implements Comparable<CarSystem> {
   }
 
   void calculateFitness() {
+    
+    float posx = controller.getposx();
+    float poxy = controller.getposy();
     int redness = controller.redness();
     float greenness = controller.greenness();
-    this.fitness = greenness - redness;
-  }
+    if (posx > 500) {
+    this.fitness = -10000;
+    } else if (posx < 0) {
+    this.fitness = -10000;  
+    } else if (poxy < 0) {
+     this.fitness = -10000; 
+    } else if (poxy > 600) {
+     this.fitness = -10000; 
+    } else {
+    this.fitness = greenness - redness*2;
+    }  
+}
 
   public CarSystem clone() {
     CarController controllerClone = controller.clone();

@@ -42,8 +42,13 @@ class CarController {
     sensorSystem.displaySensors();
   }
 
-  public boolean isGreen() {
-    boolean svar = sensorSystem.isGreen();
+  public float getposx() {
+    float svar = bil.getposx();
+    return svar;
+  }
+  
+  public float getposy() {
+    float svar = bil.getposy();
     return svar;
   }
 
