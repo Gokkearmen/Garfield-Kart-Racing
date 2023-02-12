@@ -18,7 +18,7 @@ class CarController {
   }
 
   void update() {
-
+  if(sensorSystem.whiteSensorFrameCount == 0 /*&& sensorSystem.lastGreenDetection != true*/){
     //1.)opdtarer bil 
     bil.update();
 
@@ -35,7 +35,7 @@ class CarController {
     //4.)bilen drejes
     bil.turnCar(turnAngle);
   }
-
+}
 
   void display() {
     bil.displayCar();

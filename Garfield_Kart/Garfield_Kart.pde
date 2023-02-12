@@ -1,11 +1,12 @@
 
 import java.util.Arrays;
 
-
+//programmet laver nye generationer efter "FramesPerGeneration" af frames. Hver generation muteres, og de biler med højest fitness frasorteres.
+//Klonerne starter hvor sidste generation sluttede, men kan efter behov let rykkes til startlinjen med en p-vektor. Dette er dog ikke nødvendigt, da fitness beregnes uden brug af laptimes.
 
 //populationSize: Hvor mange "controllere" der genereres, controller = bil & hjerne & sensorer
 int populationSize  = 100;
-int framesPerGeneration = 200;
+int framesPerGeneration = 250;
 int matingpoolSize = 10;
 int generation;
 int i;
@@ -73,7 +74,7 @@ void draw() {
 
     // mutate new population 
     for (int i = 0; i < population.length; i++) {
-      population[i].mutate();
+      population[i].mutate(population[i].controller);
     }
   }
   /*
