@@ -1,3 +1,6 @@
+Opgaven er lavet af Andreas Thrane Andersen og Gustav Egebjerg-Møller
+
+
 Vi har valgt den normale opgave, hvor der tages udgangspunkt i den udleverede kode.
 
 Den genetiske algoritme kører på en timer, der er sat til 250 frames. Dette kan justeres, men 250 frames giver tid nok til at nå en runde, uden at vente forgæves på de biler der bare snurrer rundt.
