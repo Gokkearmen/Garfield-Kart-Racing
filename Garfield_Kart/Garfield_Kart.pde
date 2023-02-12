@@ -1,4 +1,4 @@
-
+// Lavet af Andreas Thrane og Gustav Egebjerg - 3d2
 import java.util.Arrays;
 
 //programmet laver nye generationer efter "FramesPerGeneration" af frames. Hver generation muteres, og de biler med højest fitness frasorteres.
